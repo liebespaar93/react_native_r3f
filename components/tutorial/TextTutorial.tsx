@@ -1,9 +1,10 @@
+import React from "react"
 import { Text } from "react-native"
 
-export default function TextTutorial() {
+export default function TextTutorial(props: React.PropsWithChildren) {
   return (
     <Text>
-      Test 를 위한 문자입력
+      {props.children}
     </Text>
   )
 }

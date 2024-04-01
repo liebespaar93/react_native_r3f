@@ -103,3 +103,24 @@ declare module '*.png' {
 ```
 
 이제 편하게 사용이 가능하다
+
+## ScrollView
+
+스크롤 뷰는 스크롤이 안되는 기본 view를 스크롤 가능한 형식으로 바꿔준다\
+부분적으로 스크롤화 할 수도 있어서 필요한 부분에만 넣어주는것으로 좀더 UX 적인 앱이 만들어 진다
+
+```jsx
+import React from 'react'
+import { ScrollView } from 'react-native'
+
+
+function ScrollViewTutorial( props : React.PropsWithChildren) {
+  return (
+    <ScrollView style={{flex:1, backgroundColor: "oriange", margin:3}}>
+      {props.children}
+    </ScrollView>
+  )
+}
+
+export default ScrollViewTutorial
+```

@@ -6,14 +6,10 @@ const adaptive_icon = require("../../assets/adaptive-icon.png")
 
 function ImageTutorial() {
   return (
-    <>
-    <Image source={adaptive} style={{ width: 300, height: 300 }}></Image>
-      <Image source={adaptive_icon} style={{ width: 300, height: 300 }}></Image>
-      <Image
-        source={{ uri: "https://picsum.photos/300" }}
-        style={{ width: 300, height: 300 }}>
-      </Image>
-    </>
+    <Image
+      source={{ uri: "https://picsum.photos/300" }}
+      style={{ width: 300, height: 300, margin:10 }}>
+    </Image>
   )
 }
 
