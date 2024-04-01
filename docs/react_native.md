@@ -200,3 +200,26 @@ function ModalTutorial(props : ModalTutorialProps) {
 
 export default ModalTutorial
 ```
+
+## StatusBar
+
+| 기능 | ios | android |
+| :-: | :-: | :-: |
+| backgroundColor | ❌ | ✅ |
+| barStyle | ✅ | ✅ |
+| hidden | ✅ | ✅ |
+
+안드로이드와 ios에서 다른 부분이 있기에 주의하며 사용해야겠다
+
+```jsx
+import React from 'react'
+import { StatusBar } from 'react-native'
+
+function StatusBarTutorial() {
+  return (
+    <StatusBar backgroundColor="lightgreen" barStyle='dark-content' hidden={false}/>
+  )
+}
+
+export default StatusBarTutorial
+```
