@@ -308,3 +308,29 @@ function CustomComponentsTutorial() {
 
 export default CustomComponentsTutorial
 ```
+
+## StyleSheet
+
+react native에서는 css 를 사용하기 까다롭다\
+js 기반으로 작성이 되어야 하기때문으로 알고있는데 \
+이러한 상황을 보다 보기 좋게 ```StyleSheet```를 이용해서 작성할 수 도 있고\
+```tailwind```가 익숙하다면 ```NativeWind```라는 react native용 ```tailwind```를 사용해도 좋은거 같다
+
+```jsx
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+
+function StyleSheetTutorial() {
+  return (
+    <View style={styles.container}>
+        <Text>Style이 잘 적용됩니다</Text>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  container: { flex: 1, backgroundColor:"plum", width:"100%" }
+})
+
+export default StyleSheetTutorial
+```
