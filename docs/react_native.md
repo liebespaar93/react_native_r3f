@@ -251,7 +251,7 @@ export default ActivityIndicatorTutorial
 
 알림을 팝업해주는 컴포넌트다
 
-![Image](image.png)
+![Image](./assets/alert.png)
 
 ```jsx
 import React from 'react'
@@ -453,3 +453,28 @@ const styles = StyleSheet.create({
 
 export default StyleSheetTutorial
 ```
+
+## Layout With FlexBox
+
+flex는 화면을 사용하여 item들을 배분하는 모향을 가지는 display이다
+
+> [!WARNING]
+> axes 축이 기본적인 방향과 많이 다르다
+
+기본적인 axes
+
+|용어 | 축 | 설명|
+| :-: | :-: | :--|
+|main| x축 | 왼쪽에서 오른쪽|
+|cross| y축  | 위에서 아래로|
+
+![alt text](./assets/axes.png)
+
+react_native axes
+
+|용어 | 축 | 설명|
+| :-: | :-: | :--|
+|main| y축 | 위에서 아래로 |
+|cross| x축  | 왼쪽에서 오른쪽 |
+
+![Image](./assets/axes_react_native.png)
