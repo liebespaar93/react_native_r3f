@@ -142,3 +142,23 @@ function BottenTutorial() {
 
 export default BottenTutorial
 ```
+
+## Pressable
+
+![alt text](./assets/pressable.png)
+
+앱의 눌림 동작을 감지한다.\
+이러한 동작은 여러가지 함수를 제공하는데 길게 누르기 때기 등 다양한 함수를 사용할 수 있으니 참고하자
+
+```jsx
+import React from 'react'
+import { Pressable } from 'react-native'
+
+function PressableTutorial(props: React.PropsWithChildren) {
+  return (
+    <Pressable onPress={()=> {console.log("pressable pressed")}}>{props.children}</Pressable>
+  )
+}
+
+export default PressableTutorial
+```

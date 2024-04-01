@@ -6,18 +6,21 @@ import ImageTutorial from './components/tutorial/ImageTutorial';
 import ScrollViewTutorial from './components/tutorial/ScrollViewTutorial';
 import InfoApp from './components/InfoApp';
 import BottenTutorial from './components/tutorial/BottenTutorial';
+import PressableTutorial from './components/tutorial/PressableTutorial';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <View style={{height:20, width:"auto", backgroundColor:"plum"}} >
+      <View style={{ height: 20, width: "auto", backgroundColor: "plum" }} >
         <TextTutorial>
           타이틀
         </TextTutorial>
       </View>
       <ScrollViewTutorial>
         <ViewTutorial backgroundColor='lightblue'>
-          <ImageTutorial></ImageTutorial>
+          <PressableTutorial>
+            <ImageTutorial></ImageTutorial>
+          </PressableTutorial>
           <BottenTutorial></BottenTutorial>
           <InfoApp></InfoApp>
         </ViewTutorial>
