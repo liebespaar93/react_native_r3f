@@ -1,12 +1,13 @@
 import { Button, Modal, StyleSheet, Text, View } from 'react-native';
 import ModalTutorial from './components/tutorial/ModalTutorial';
 import StatusBarTutorial from './components/tutorial/StatusBarTutorial';
+import ActivityIndicatorTutorial from './components/tutorial/ActivityIndicatorTutorial';
 
 export default function App() {
 
   return (
     <View style={styles.container}>
-      <StatusBarTutorial></StatusBarTutorial>
+      <ActivityIndicatorTutorial></ActivityIndicatorTutorial>
     </View>
   );
 }

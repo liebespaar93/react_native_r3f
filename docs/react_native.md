@@ -223,3 +223,26 @@ function StatusBarTutorial() {
 
 export default StatusBarTutorial
 ```
+
+## ActivityIndicator
+
+무언가 작업중을 나타네는 애니메이션을 만들때 유용하다
+
+```jsx
+import React from 'react'
+import { ActivityIndicator, View } from 'react-native'
+
+function ActivityIndicatorTutorial() {
+  return (
+    <View>
+      <ActivityIndicator />
+      <ActivityIndicator size='large' />
+      <ActivityIndicator size='large' color="yellow" />
+      <ActivityIndicator size='large' color="midnightblue" animating={true} />
+      <ActivityIndicator size='large' color="midnightblue" animating={false} />
+    </View>
+  )
+}
+
+export default ActivityIndicatorTutorial
+```
