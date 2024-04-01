@@ -124,3 +124,21 @@ function ScrollViewTutorial( props : React.PropsWithChildren) {
 
 export default ScrollViewTutorial
 ```
+
+## Button
+
+버튼을 만들어 준다\
+아직 버튼을 꾸미는 방법을 모르겠다 추후 알아 가보자
+
+```jsx
+import React from 'react'
+import { Button } from 'react-native'
+
+function BottenTutorial() {
+  return (
+    <Button title="Press" color="midnightblue"  onPress={()=>{console.log("button pressed")}} />
+  )
+}
+
+export default BottenTutorial
+```

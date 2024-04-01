@@ -5,6 +5,7 @@ import TextTutorial from './components/tutorial/TextTutorial';
 import ImageTutorial from './components/tutorial/ImageTutorial';
 import ScrollViewTutorial from './components/tutorial/ScrollViewTutorial';
 import InfoApp from './components/InfoApp';
+import BottenTutorial from './components/tutorial/BottenTutorial';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
       <ScrollViewTutorial>
         <ViewTutorial backgroundColor='lightblue'>
           <ImageTutorial></ImageTutorial>
+          <BottenTutorial></BottenTutorial>
           <InfoApp></InfoApp>
         </ViewTutorial>
       </ScrollViewTutorial>
