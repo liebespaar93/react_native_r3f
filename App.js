@@ -1,30 +1,11 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ViewTutorial from './components/tutorial/ViewTutorial';
-import TextTutorial from './components/tutorial/TextTutorial';
-import ImageTutorial from './components/tutorial/ImageTutorial';
-import ScrollViewTutorial from './components/tutorial/ScrollViewTutorial';
-import InfoApp from './components/InfoApp';
-import BottenTutorial from './components/tutorial/BottenTutorial';
-import PressableTutorial from './components/tutorial/PressableTutorial';
+import { Button, Modal, StyleSheet, Text, View } from 'react-native';
+import ModalTutorial from './components/tutorial/ModalTutorial';
 
 export default function App() {
+
   return (
     <View style={styles.container}>
-      <View style={{ height: 20, width: "auto", backgroundColor: "plum" }} >
-        <TextTutorial>
-          타이틀
-        </TextTutorial>
-      </View>
-      <ScrollViewTutorial>
-        <ViewTutorial backgroundColor='lightblue'>
-          <PressableTutorial>
-            <ImageTutorial></ImageTutorial>
-          </PressableTutorial>
-          <BottenTutorial></BottenTutorial>
-          <InfoApp></InfoApp>
-        </ViewTutorial>
-      </ScrollViewTutorial>
+      <ModalTutorial></ModalTutorial>
     </View>
   );
 }

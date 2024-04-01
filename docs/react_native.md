@@ -134,13 +134,13 @@ export default ScrollViewTutorial
 import React from 'react'
 import { Button } from 'react-native'
 
-function BottenTutorial() {
+function ButtonTutorial() {
   return (
     <Button title="Press" color="midnightblue"  onPress={()=>{console.log("button pressed")}} />
   )
 }
 
-export default BottenTutorial
+export default ButtonTutorial
 ```
 
 ## Pressable
@@ -161,4 +161,42 @@ function PressableTutorial(props: React.PropsWithChildren) {
 }
 
 export default PressableTutorial
+```
+
+## Modal
+
+모달이란?\
+모달은 한특정 컴포넌트를 어떠한 방식으로 화면에 표현할지 보여주는 거같다.\
+특별한 차이점이라고 하면 앱스타일로 새로운 창에 띄워주기 혹은 슬라이드로 나와 보여주기등 다양한 방법으로 액티브하게 만들어 줄수 있는거 같다.
+
+```jsx
+import React, { useState } from 'react'
+import { Button, Modal, ModalProps, Text, View } from 'react-native'
+
+type ModalTutorialProps = {
+  options?: ModalProps
+} & React.PropsWithChildren
+function ModalTutorial(props : ModalTutorialProps) {
+  const [modalVisible, setModalVisible] = useState(false);
+
+  return (
+    <View>
+      <Button title='Press' color={'midnightblue'} onPress={() => { setModalVisible(true) }}></Button>
+      <Modal visible={modalVisible}
+      onRequestClose={() => {
+        setModalVisible(false)
+      }}
+      animationType='slide'
+      presentationStyle='pageSheet'
+      >
+        <View style={{ flex: 1, backgroundColor: "lightblue", padding: 60 }}>
+          <Text>Modal start</Text>
+          <Button title="Close" color="midnightblue" onPress={() => { setModalVisible(false) }}></Button>
+        </View>
+      </Modal>
+    </View>
+  )
+}
+
+export default ModalTutorial
 ```
