@@ -585,3 +585,16 @@ main axis를 담당한다(잊지말자 여긴 세로가 main이다)
 | space-around | 남은 공간을 오브젝트 위와 아래에 똑같이 배분한다 |
 | space-between | 엘리먼트 사이만 나눠준다 |
 | space-evenly | 남은 공간을 오브젝트 사이에 똑같이 배분한다 |
+
+## AlignItems
+
+cross axis를 담당한다(잊지말자 여긴 가로가 cross이다)
+
+| 옵션 | 설명 |
+| :-- | :--|
+| flex-start | 맨 왼쪽를 기준으로 정렬한다 |
+| center| 중앙을 기준으로 정렬한다 |
+| flex-end | 맨 오른쪽을 기준으로 정렬한다 |
+| baseline | 모든 오브젝트의 중앙값을 제일큰 오브젝트의 중앙으로 설정한다 |
+| stretch | 가로를 꽉 체워준다 |
+

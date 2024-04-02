@@ -27,11 +27,9 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    alignItems: "stretch",
     marginTop: 30,
     paddingTop: 30,
-    backgroundColor: '#ffdfcf',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: '#ffdfcf'
   },
 });
