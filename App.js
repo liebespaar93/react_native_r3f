@@ -11,10 +11,10 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      <BoxStyle style={{ backgroundColor: "#1c4c56", flex: 1 }}>1c4c56</BoxStyle>
-      <BoxStyle style={{ backgroundColor: "#ffbbbb", flex: 3 }}>ffbbbb</BoxStyle>
-      <BoxStyle style={{ backgroundColor: "#1eae98", flex: 2 }}>1eae98</BoxStyle>
-      <BoxStyle style={{ backgroundColor: "#6fd6ff" }}>6fd6ff</BoxStyle>
+      <BoxStyle style={{ backgroundColor: "#1c4c56", alignSelf: "flex-start" }}>1c4c56</BoxStyle>
+      <BoxStyle style={{ backgroundColor: "#ffbbbb", alignSelf: "stretch" }}>ffbbbb</BoxStyle>
+      <BoxStyle style={{ backgroundColor: "#1eae98", alignSelf: "auto" }}>1eae98</BoxStyle>
+      <BoxStyle style={{ backgroundColor: "#6fd6ff", alignSelf:"stretch",  alignItems:"flex-start" }}>6fd6ff</BoxStyle>
       <BoxStyle style={{ backgroundColor: "#fe90af" }}>fe90af</BoxStyle>
       <BoxStyle style={{ backgroundColor: "#ff8c8c" }}>ff8c8c</BoxStyle>
       <BoxStyle style={{ backgroundColor: "#a890fe" }}>a890fe</BoxStyle>
@@ -27,7 +27,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "stretch",
+    alignItems: "flex-end",
     marginTop: 30,
     paddingTop: 30,
     backgroundColor: '#ffdfcf'
