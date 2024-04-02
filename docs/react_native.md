@@ -612,3 +612,9 @@ cross axis를 담당한다(잊지말자 여긴 가로가 cross이다)
 | nowrap | 기본 상태 |
 | wrap | 넘어가는 공간을 다음 줄로 이동 |
 | wrap-reverse | 반대로 시작하여 랩함 순서는 바뀌지 않음 |
+
+## Align content
+
+위에 FlexWrap 과 함께 쓰는 옵션이다
+
+결과는 상위 Align 을 쓰던것과 같다 하지만 wrap 이 되어 잘 분할되어 보여준다
