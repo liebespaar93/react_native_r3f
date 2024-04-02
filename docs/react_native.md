@@ -618,3 +618,9 @@ cross axis를 담당한다(잊지말자 여긴 가로가 cross이다)
 위에 FlexWrap 과 함께 쓰는 옵션이다
 
 결과는 상위 Align 을 쓰던것과 같다 하지만 wrap 이 되어 잘 분할되어 보여준다
+
+## Gap
+
+content끼리의 사이거리를 조정할 수 있다
+
+```Gap``` ````rowGap```` ```columnGap```과 같은 형식으로 옵션을 줄 수 있다
