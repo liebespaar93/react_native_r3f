@@ -558,3 +558,17 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+## Flex
+
+공간을 차지하는 css display 표현이다.\
+이러한 공간을 flex의 값으로 또 분배를 할 수 있으며 모든것을 일정하게 배분하기 때문에 사용하기 편하다
+
+## Flex Direction
+
+|  | 설명 |
+| :-- | :--|
+| column | 열을 나눈다 (세로를 나눈다) |
+| column-reverse | 열의 순서를 뒤집는다 |
+| row | 행을 나눈다 (가로를 일정분할한다) |
+| row-reverse | 행의 순서를 뒤집는다 |
