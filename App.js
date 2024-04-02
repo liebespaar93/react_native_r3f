@@ -27,7 +27,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: "column-reverse",
+    justifyContent: "space-between",
     marginTop: 30,
     paddingTop: 30,
     backgroundColor: '#ffdfcf',

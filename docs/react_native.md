@@ -566,9 +566,22 @@ const styles = StyleSheet.create({
 
 ## Flex Direction
 
-|  | 설명 |
+| 옵션 | 설명 |
 | :-- | :--|
 | column | 열을 나눈다 (세로를 나눈다) |
 | column-reverse | 열의 순서를 뒤집는다 |
 | row | 행을 나눈다 (가로를 일정분할한다) |
 | row-reverse | 행의 순서를 뒤집는다 |
+
+## JustifyContent
+
+main axis를 담당한다(잊지말자 여긴 세로가 main이다)
+
+| 옵션 | 설명 |
+| :-- | :--|
+| flex-start | 맨 위를 기준으로 정렬한다 |
+| center| 중앙을 기준으로 정렬한다 |
+| flex-end | 맨밑을 기준으로 정렬한다 |
+| space-around | 남은 공간을 오브젝트 위와 아래에 똑같이 배분한다 |
+| space-between | 엘리먼트 사이만 나눠준다 |
+| space-evenly | 남은 공간을 오브젝트 사이에 똑같이 배분한다 |
