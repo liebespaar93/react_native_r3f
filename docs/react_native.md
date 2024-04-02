@@ -478,3 +478,83 @@ react_native axes
 |cross| x축  | 왼쪽에서 오른쪽 |
 
 ![Image](./assets/axes_react_native.png)
+
+## Code Setup
+
+box 스타일을 컴포넌트로 만들어보자
+
+```jsx
+import React from 'react'
+import { StyleSheet, Text, View, ViewStyle } from 'react-native'
+
+type BoxStyleProps = {
+  style : ViewStyle
+} & React.PropsWithChildren
+
+function BoxStyle(props : BoxStyleProps ) {
+
+  return (
+    <View style={[styles.box, props.style]}>
+      <Text style={styles.text}>{props.children}</Text>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  box : {
+    backgroundColor: 'black',
+    padding:20,
+    margin:2,
+    minWidth:240,
+    borderRadius:30
+  },
+  text:{
+    fontSize:24,
+    fontWeight:"bold",
+    textAlign:"center",
+    color:"white"
+  }
+})
+
+export default BoxStyle
+```
+
+이제 이 박스들을 간단한 코드로 여러개를 만들 수 있다
+
+```jsx
+import { Button, Modal, StyleSheet, Text, View } from 'react-native';
+import ModalTutorial from './components/tutorial/ModalTutorial';
+import StatusBarTutorial from './components/tutorial/StatusBarTutorial';
+import ActivityIndicatorTutorial from './components/tutorial/ActivityIndicatorTutorial';
+import AlertTutoriai from './components/tutorial/AlertTutoriai';
+import CustomComponentsTutorial from './components/tutorial/CustomComponentsTutorial';
+import StyleSheetTutorial from './components/tutorial/StyleSheetTutorial';
+import BoxStyle from './components/BoxStyle';
+
+export default function App() {
+
+  return (
+    <View style={styles.container}>
+    <BoxStyle style={{backgroundColor:"#1c4c56"}}>1c4c56</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#ffbbbb"}}>ffbbbb</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#1eae98"}}>1eae98</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#6fd6ff"}}>6fd6ff</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#fe90af"}}>fe90af</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#ff8c8c"}}>ff8c8c</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#a890fe"}}>a890fe</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#ffffcf"}}>ffffcf</BoxStyle>
+      <BoxStyle style={{backgroundColor:"#fca5f1"}}>fca5f1</BoxStyle>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    marginTop:30,
+    paddingTop: 30,
+    backgroundColor: '#ffdfcf',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
+```
