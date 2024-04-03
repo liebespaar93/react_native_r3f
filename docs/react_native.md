@@ -966,3 +966,221 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
+## Pokemon Card
+
+포켓몬카드를 만드는 예시이다.
+
+컴포넌트를 잘 만들어 두면 보다 편하게 같은 구죠을 만들 수 있기때문에 잘 활용하자 🥳
+
+🍝 App.tsx
+
+```jsx
+import { SafeAreaView, Platform, StyleSheet, View, useWindowDimensions, ScrollView } from 'react-native';
+import PokemonCard from './components/tutorial/PokemonCard/PokemonCard';
+
+export default function App() {
+  const dimensions = useWindowDimensions();
+  const windowWidth = dimensions.width;
+  const windowHeight = dimensions.height;
+
+  const charmanderData = {
+    name: "Charmander",
+    image: require("@/assets/pokemon/charmander.png"),
+    type: "Fire",
+    hp: 39,
+    moves: ["Scratch", "Ember", "Growl", "Leer"],
+    weaknesses: ["Water", "Rock"],
+  };
+
+  const squirtleData = {
+    name: "Squirtle",
+    image: require("@/assets/pokemon/squirtle.png"), // Replace with the actual image path
+    type: "Water",
+    hp: 44,
+    moves: ["Tackle", "Water Gun", "Tail Whip", "Withdraw"],
+    weaknesses: ["Electric", "Grass"],
+  };
+
+  const bulbasaurData = {
+    name: "Bulbasaur",
+    image: require("@/assets/pokemon/bulbasaur.png"), // Replace with the actual image path
+    type: "Grass",
+    hp: 45,
+    moves: ["Tackle", "Vine Whip", "Growl", "Leech Seed"],
+    weaknesses: ["Fire", "Ice", "Flying", "Psychic"],
+  };
+
+  const pikachuData = {
+    name: "Pikachu",
+    image: require("@/assets/pokemon/pikachu.png"), // Replace with the actual image path
+    type: "Electric",
+    hp: 35,
+    moves: ["Quick Attack", "Thunderbolt", "Tail Whip", "Growl"],
+    weaknesses: ["Ground"],
+  };
+
+  console.log(charmanderData)
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <ScrollView>
+          <PokemonCard {...charmanderData} />
+          <PokemonCard {...squirtleData} />
+          <PokemonCard {...bulbasaurData} />
+          <PokemonCard {...pikachuData} />
+        </ScrollView>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: '#ffdfcf'
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: Platform.OS === "ios" ? '#ffa13f' : '#ffdfcf'
+  },
+});
+```
+
+🍝 PokemonCard.tsx
+```jsx
+import React from 'react'
+import { StyleSheet, View, Platform, Text, Image, ImageSourcePropType } from 'react-native'
+
+type PokemonCardProps = {
+  name?: string,
+  image: ImageSourcePropType,
+  type?: string,
+  hp?: number,
+  moves: string[],
+  weaknesses: string[],
+}
+
+const getTypeDetails = (type) => {
+  switch (type.toLowerCase()) {
+    case "electric":
+      return { borderColor: "#FFD700", emoji: "⚡️" };
+    case "water":
+      return { borderColor: "#6493EA", emoji: "💧" };
+    case "fire":
+      return { borderColor: "#FF5733", emoji: "🔥" };
+    case "grass":
+      return { borderColor: "#66CC66", emoji: "🌿" };
+    default:
+      return { borderColor: "#A0A0A0", emoji: "❓" };
+  }
+};
+
+
+function PokemonCard(props: PokemonCardProps) {
+  const { borderColor, emoji } = getTypeDetails(props.type)
+
+  return (
+    <View style={styles.card}>
+      <View style={styles.nameContainer}>
+        <Text style={styles.name}>{props.name}</Text>
+        <Text style={styles.hp}>❤️{props.hp}</Text>
+      </View>
+      <Image
+        style={styles.image}
+        source={props.image}
+        accessibilityLabel={`${props.name} pokemon`}
+        resizeMode="contain" />
+
+      <View style={styles.typeContainer}>
+        <View style={[styles.badge, { borderColor }]}>
+          <Text style={styles.typeEmoji} >{emoji}</Text>
+          <Text style={styles.type} >{props.type}</Text>
+        </View>
+      </View>
+
+      <View style={styles.moveContainer}>
+        <Text style={styles.moveText}>Moves: {props.moves.join(", ")}</Text>
+      </View>
+
+      <View style={styles.weaknessContainer}>
+        <Text style={styles.weaknessText} >Weakness: {props.weaknesses.join(", ")}</Text>
+      </View>
+    </View>
+  )
+}
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#fff",
+    borderRadius: 16,
+    borderWidth: 2,
+    padding: 16,
+    margin: 16,
+    ...Platform.select({
+      ios: {
+        shadowOffset: { width: 2, height: 2 },
+        shadowColor: "#333",
+        shadowOpacity: 0.3,
+        shadowRadius: 4
+      },
+      android: {
+        elevation: 5,
+      }
+    })
+  },
+  nameContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "100%",
+    marginBottom: 32,
+
+  },
+  name: {
+    fontSize: 24,
+    fontWeight: "bold"
+  },
+  hp: {
+    fontSize: 32,
+  },
+  image: {
+    width: "100%",
+    height: 200,
+  },
+  typeContainer: {
+    alignItems: "center",
+    marginBottom: 36
+  },
+  badge: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    borderWidth: 4,
+  },
+  typeEmoji: {
+    fontSize: 30,
+    margin: 12
+  },
+  type: {
+    fontSize: 22,
+    fontWeight: "bold"
+  },
+  moveContainer: {
+    marginBottom: 16
+  },
+  moveText: {
+    fontSize: 22,
+    fontWeight: "bold"
+  },
+  weaknessContainer: {
+    marginBottom: 8,
+  },
+  weaknessText: {
+    fontSize: 16,
+  },
+})
+export default PokemonCard
+```
