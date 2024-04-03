@@ -624,3 +624,8 @@ cross axis를 담당한다(잊지말자 여긴 가로가 cross이다)
 content끼리의 사이거리를 조정할 수 있다
 
 ```Gap``` ````rowGap```` ```columnGap```과 같은 형식으로 옵션을 줄 수 있다
+
+## Flax Basis
+
+flex를 하기전에 공간을 정합니다.\
+height와는 다르게 content의 크기와 상관없이 크기를 조절 할 수 있습니다.
