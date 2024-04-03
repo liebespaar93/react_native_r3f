@@ -880,3 +880,89 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
+## Platform
+
+```PlatForm```이라는 클레스를 가지고 Divce의 OS정보를 가져오는거 같다.\
+이 클레스는 ios android web window 등 여러가지를 감지하는데 이러한 상황마다 설정을 다르게 주어 좀더 사용자 친화적인 앱을 만들어 줄 수 있는거 같다
+
+```js
+Platform.OS: "ios" | "android" | "windows" | "macos" | "web"
+```
+
+에는 이러한 속성들이 시스템에 따라담겨있고
+
+```jsx
+
+  text: {
+    ...Platform.select({
+      ios: {
+        color: "#a33fff"
+      },
+      android: {
+        color: "#00f0a3"
+      }
+    }),
+  }
+```
+
+와 같이 어떠한 system에서 효과를 다르게 줄건지도 설정이 가능하다
+
+또한 좀 신기하지만 쓰기 불편한 filename 시스템이 있는데
+
+```**.ios.tsx``` ```**.android.tsx```와 같이 한폴더에 파일을 같이 두면 시스템 속성에 맞는 파일을 가져온다고 한다
+
+```tsx
+import { Button, Dimensions, Modal, SafeAreaView, Platform, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import BoxStyle from './components/BoxStyle';
+import { useEffect, useState } from 'react';
+import CustomButton from '@/components/tutorial/CustomButton/CustomButton'
+
+export default function App() {
+  const dimensions = useWindowDimensions();
+
+  const windowWidth = dimensions.width;
+  const windowHeight = dimensions.height;
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <View>
+          <CustomButton title={"press on"} ></CustomButton>
+          <BoxStyle style={[styles.box, {
+            width: windowWidth > 500 ? '50' : '20',
+            height: windowHeight > 500 ? '50' : '20',
+          }]}>
+            <Text style={[styles.text ,{ fontSize: windowWidth > 500 ? 50 : 24, }]}>1c4c56</Text></BoxStyle>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: '#ffdfcf'
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: Platform.OS === "ios" ? '#ffa13f' : '#ffdfcf'
+  },
+  box: {
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+    ...Platform.select({
+      ios: {
+        color: "#a33fff"
+      },
+      android: {
+        color: "#00f0a3"
+      }
+    }),
+  }
+});
+```
