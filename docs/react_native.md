@@ -832,3 +832,51 @@ const styles = StyleSheet.create({
   }
 });
 ```
+
+## SafeAreaView
+
+아이폰 의 힌치( 대머리 ) 나 안드로이드의 네비케이션들의 오차를 스스로 작업 해줄 수 도 있지만 ```SafeAreaView```를 사용해서 이미 관리되고 있는 ui는 스타일이 께지지 않게 유지해준다
+
+```jsximport { Button, Dimensions, Modal, SafeAreaView, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import BoxStyle from './components/BoxStyle';
+import { useEffect, useState } from 'react';
+
+export default function App() {
+  const dimensions = useWindowDimensions();
+
+  const windowWidth = dimensions.width;
+  const windowHeight = dimensions.height;
+  return (
+    <SafeAreaView style={styles.safeContainer}>
+      <View style={styles.container}>
+        <View>
+          <BoxStyle style={[styles.box, {
+            width: windowWidth > 500 ? '50' : '20',
+            height: windowHeight > 500 ? '50' : '20',
+          }]}>
+            <Text style={{ fontSize: windowWidth > 500 ? 50 : 24, }}>1c4c56</Text></BoxStyle>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  safeContainer: {
+    flex: 1,
+    backgroundColor: '#ffdfcf'
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    backgroundColor: '#ffdfcf'
+  },
+  box: {
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+  }
+});
+```
