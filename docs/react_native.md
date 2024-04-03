@@ -645,3 +645,190 @@ Relative는 공을 다른 컨포넌트와 공유하며 공간을 정한다
 
 하지만 Absolute는 부모 컨포넌트의 위치를 기준으로 독립적인 위치를 갖게 된다\
 그럼으로 좀더 자유 로운 위치 조정이 가능해진다
+
+## Dymnamic User Interfaces
+
+사용자마다 화면의 크기가 다르다 이것을 사용자에게 맞게 작성하는 방법을 알아보자
+
+## Dimensions adaptive_icon
+
+> [!NOTE]
+> 화면 크기에 따른 조정 방법도
+
+```jsx
+import { Button, Dimensions, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import BoxStyle from './components/BoxStyle';
+
+export default function App() {
+
+  return (
+    <View style={styles.container}>
+      <BoxStyle style={styles.box}>
+        <Text style={styles.text}>1c4c56</Text></BoxStyle>
+    </View>
+  );
+}
+
+const windowWidth = Dimensions.get("window").width;
+const windowHeight = Dimensions.get("window").height;
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#ffdfcf'
+  },
+  box: {
+    width: windowWidth > 500 ? '50' : '20',
+    width: windowHeight > 500 ? '50' : '20',
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+    fontSize: windowWidth > 500 ? 50 : 24,
+  }
+});
+```
+
+이러한 방식으로 수종으로 화면의 크기를 가져와 일정한 크기로 지정해 주는 방법도 있다 혹은 root 변수 값으로 배정해주어도 좋은거 같다.
+
+## Dimensions API Drawback
+
+```app.json```에 있는 ```orientation``` 모드를 ```default``` 로 설정하면\
+가로모드와 세로모드가 적용 되는 것을 볼 수 있다.
+
+```json
+{
+  "expo": {
+    "name": "react_native_r3f",
+    "slug": "react_native_r3f",
+    "version": "1.0.0",
+    "orientation": "default",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}
+```
+
+이제 회전을 통해 변화를 알아보자
+
+```jsx
+import { Button, Dimensions, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
+import BoxStyle from './components/BoxStyle';
+import { useEffect, useState } from 'react';
+
+export default function App() {
+  const [dimensions, setDimensions] = useState({
+    window: Dimensions.get("window")
+  })
+
+  useEffect(() => {
+    const subscription = Dimensions.addEventListener("change", ( window ) => {
+      setDimensions(window)
+    })
+    return () => { subscription.remove() };
+  }, [])
+
+  const windowWidth = dimensions.window.width;
+  const windowHeight = dimensions.window.height;
+  return (
+    <View style={styles.container}>
+      <View>
+        <BoxStyle style={[styles.box, {
+          width: windowWidth > 500 ? '50' : '20',
+          height: windowHeight > 500 ? '50' : '20',
+        }]}>
+          <Text style={{ fontSize: windowWidth > 500 ? 50 : 24, }}>1c4c56</Text></BoxStyle>
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#ffdfcf'
+  },
+  box: {
+    // width: windowWidth > 500 ? '50' : '20',
+    // height: windowHeight > 500 ? '50' : '20',
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+    // fontSize: windowWidth > 500 ? 50 : 24,
+  }
+});
+```
+
+이런식으로 변수를 사용해서 작업하는것도 가능하다
+
+## useWindowDimensions
+
+> [!TIP]
+> ```useWindowDimensions```을 이용하여 좀더 편하게 사용이 가능하다
+
+```
+import { Button, Dimensions, Modal, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
+import BoxStyle from './components/BoxStyle';
+import { useEffect, useState } from 'react';
+
+export default function App() {
+  const dimensions = useWindowDimensions();
+  
+  const windowWidth = dimensions.width;
+  const windowHeight = dimensions.height;
+  return (
+    <View style={styles.container}>
+      <View>
+        <BoxStyle style={[styles.box, {
+          width: windowWidth > 500 ? '50' : '20',
+          height: windowHeight > 500 ? '50' : '20',
+        }]}>
+          <Text style={{ fontSize: windowWidth > 500 ? 50 : 24, }}>1c4c56</Text></BoxStyle>
+      </View>
+    </View>
+  );
+}
+
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: '#ffdfcf'
+  },
+  box: {
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+  }
+});
+```

@@ -1,37 +1,41 @@
-import { Button, Modal, ScrollView, StyleSheet, Text, View } from 'react-native';
-import ModalTutorial from './components/tutorial/ModalTutorial';
-import StatusBarTutorial from './components/tutorial/StatusBarTutorial';
-import ActivityIndicatorTutorial from './components/tutorial/ActivityIndicatorTutorial';
-import AlertTutoriai from './components/tutorial/AlertTutoriai';
-import CustomComponentsTutorial from './components/tutorial/CustomComponentsTutorial';
-import StyleSheetTutorial from './components/tutorial/StyleSheetTutorial';
+import { Button, Dimensions, Modal, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import BoxStyle from './components/BoxStyle';
+import { useEffect, useState } from 'react';
 
 export default function App() {
-
+  const dimensions = useWindowDimensions();
+  
+  const windowWidth = dimensions.width;
+  const windowHeight = dimensions.height;
   return (
     <View style={styles.container}>
-        <BoxStyle style={{ backgroundColor: "#1c4c56", alignSelf: "flex-start" }}>1c4c56</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#ffbbbb", alignSelf: "stretch" }}>ffbbbb</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#1eae98", alignSelf: "auto" }}>1eae98</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#6fd6ff", alignSelf: "stretch", alignItems: "flex-start" }}>6fd6ff</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#fe90af" }}>fe90af</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#ff8c8c" }}>ff8c8c</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#a890fe" }}>a890fe</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#ffffcf" }}>ffffcf</BoxStyle>
-        <BoxStyle style={{ backgroundColor: "#fca5f1" }}>fca5f1</BoxStyle>
+      <View>
+        <BoxStyle style={[styles.box, {
+          width: windowWidth > 500 ? '50' : '20',
+          height: windowHeight > 500 ? '50' : '20',
+        }]}>
+          <Text style={{ fontSize: windowWidth > 500 ? 50 : 24, }}>1c4c56</Text></BoxStyle>
+      </View>
     </View>
   );
 }
 
+
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
-    flexWrap: "wrap-reverse",
-    height: 300,
-    alignItems: "flex-end",
-    marginTop: 30,
-    paddingTop: 30,
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: '#ffdfcf'
   },
+  box: {
+    // width: windowWidth > 500 ? '50' : '20',
+    // height: windowHeight > 500 ? '50' : '20',
+    backgroundColor: "#1c4c56",
+    alignSelf: "flex-start"
+  },
+  text: {
+    // fontSize: windowWidth > 500 ? 50 : 24,
+  }
 });
+
