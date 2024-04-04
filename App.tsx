@@ -7,6 +7,7 @@ import SectionListTutorial from './components/tutorial/SectionListTutorial';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import InputTextTutorial from './components/tutorial/InputTextTutorial';
+import SwitchTutorial from './components/tutorial/SwitchTutorial';
 
 export default function App() {
   const dimensions = useWindowDimensions();
@@ -17,6 +18,7 @@ export default function App() {
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
         <InputTextTutorial />
+        <SwitchTutorial />
       </View>
     </SafeAreaView>
   );

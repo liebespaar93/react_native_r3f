@@ -1398,3 +1398,37 @@ const styles = StyleSheet.create({
 
 > [!IMPORTANT]
 > 자동으로 수정되는 키값을 꺼두어야 사용자의 입력값을 정확히 받을 수 있다
+
+## Switch
+
+스위치 버튼을 만드는 거다
+
+> [!IMPORTANT]
+> ```onValueChange``` 함수에 꼭 함수형으로 ```set```함수를 넣어줘라
+
+```jsx
+import React, { useState } from 'react'
+import { StyleSheet, Switch } from 'react-native'
+
+function SwitchTutorial() {
+  const [mode, setMode] = useState(false);
+
+  return (
+    <Switch
+      value={mode}
+      onValueChange={() => {setMode((value) => !value)}}
+      style={styles.switch}
+      trackColor={{ false: "#FFAF45", true: "#FFAF45" }}
+      thumbColor='#F3EDC8'
+    />
+  )
+}
+
+export default SwitchTutorial
+
+const styles = StyleSheet.create({
+  switch: {
+
+  }
+})
+```
