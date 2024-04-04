@@ -1,8 +1,9 @@
-import { SafeAreaView, Platform, StyleSheet, View, useWindowDimensions, ScrollView, Text, FlatList } from 'react-native';
+import { SafeAreaView, Platform, StyleSheet, View, useWindowDimensions, ScrollView, Text, FlatList, SectionList } from 'react-native';
 import PokemonCard from './components/tutorial/PokemonCard/PokemonCard';
 
 import pokemonList from "@/data/pokemon.json"
-import FlatListTutorial from './components/tutorial/FlatListTutorial';
+import groupPokemonList from "@/data/group-data.json"
+import SectionListTutorial from './components/tutorial/SectionListTutorial';
 
 export default function App() {
   const dimensions = useWindowDimensions();
@@ -12,7 +13,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-        <FlatListTutorial list={pokemonList}></FlatListTutorial>
+        <SectionListTutorial list={groupPokemonList}></SectionListTutorial>
       </View>
     </SafeAreaView>
   );
@@ -24,10 +25,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffdfcf'
   },
   container: {
+    padding: 16,
     flex: 1,
   },
   scrollView: {
-    paddingHorizontal: 16
+    paddingHorizontal: 16,
   },
   card: {
     backgroundColor: "#fff",
@@ -47,5 +49,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontSize: 30,
     margin: 10,
+  },
+  sectionHeaderText: {
+    fontSize: 22,
+    fontWeight: "bold"
   }
 });

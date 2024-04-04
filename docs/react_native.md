@@ -1297,3 +1297,59 @@ ListFooterComponent={<Text style={styles.footerText}>여기는 푸터입니다</
 ```
 
 상위 코드를 ```FlatList```에 넣으면 적용이 된다
+
+## Section List
+
+세션별로 나누어 좀더 편하게 그룹을 관리할 수 있다\
+뭐랄까 점도 정교화된 스타일 이라고 생각하면 된다
+
+```jsx
+import React from 'react'
+import { SectionList, StyleSheet, Text, View } from 'react-native'
+
+type SectionListTutorialProps = {
+  list: {
+    type: string,
+    data: string[]
+  }[]
+}
+
+function SectionListTutorial(props: SectionListTutorialProps) {
+  return (
+    <SectionList
+      sections={props.list}
+      renderItem={(info) => {
+        return (
+          <View style={styles.card}>
+            <Text style={styles.cardText}>{info.item}</Text>
+          </View>)
+      }}
+      renderSectionHeader={({ section }) => {
+        return <Text style={styles.sectionHeaderText}>{section.type}</Text>
+      }}
+      SectionSeparatorComponent={() => <View style={{ height: 16 }} />}
+    />
+  )
+}
+
+export default SectionListTutorial
+
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: "#fff",
+    padding: 16,
+    borderRadius: 8,
+    borderWidth: 1
+  },
+  cardText: {
+    fontSize: 24
+  },
+  sectionHeaderText: {
+    fontSize: 22,
+    fontWeight: "bold"
+  }
+});
+```
+
+이런식으로 사용가능하고 목차별로 나누아 지기 때문에 눈에 확띈다.
