@@ -1,7 +1,8 @@
-import { SafeAreaView, Platform, StyleSheet, View, useWindowDimensions, ScrollView, Text } from 'react-native';
+import { SafeAreaView, Platform, StyleSheet, View, useWindowDimensions, ScrollView, Text, FlatList } from 'react-native';
 import PokemonCard from './components/tutorial/PokemonCard/PokemonCard';
 
 import pokemonList from "@/data/pokemon.json"
+import FlatListTutorial from './components/tutorial/FlatListTutorial';
 
 export default function App() {
   const dimensions = useWindowDimensions();
@@ -11,16 +12,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-        <ScrollView style={styles.scrollView}>
-          {pokemonList.map((pokemon, index) => {
-            return (
-              <View style={styles.card} key={pokemon.id}>
-                <Text style={styles.cardText}>{pokemon.type}</Text>
-                <Text style={styles.cardText}>{pokemon.name}</Text>
-              </View>
-            )
-          })}
-        </ScrollView>
+        <FlatListTutorial list={pokemonList}></FlatListTutorial>
       </View>
     </SafeAreaView>
   );
@@ -41,10 +33,19 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     padding: 16,
     borderRadius: 8,
-    borderWidth: 1,
-    marginBottom: 16
+    borderWidth: 1
   },
   cardText: {
     fontSize: 24
   },
+  headerText: {
+    textAlign: "center",
+    fontSize: 30,
+    margin: 10,
+  },
+  footerText: {
+    textAlign: "center",
+    fontSize: 30,
+    margin: 10,
+  }
 });

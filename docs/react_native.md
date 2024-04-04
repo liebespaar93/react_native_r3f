@@ -793,7 +793,7 @@ const styles = StyleSheet.create({
 > [!TIP]
 > ```useWindowDimensions```을 이용하여 좀더 편하게 사용이 가능하다
 
-```
+```jsx
 import { Button, Dimensions, Modal, ScrollView, StyleSheet, Text, View, useWindowDimensions } from 'react-native';
 import BoxStyle from './components/BoxStyle';
 import { useEffect, useState } from 'react';
@@ -1049,6 +1049,7 @@ const styles = StyleSheet.create({
 ```
 
 🍝 PokemonCard.tsx
+
 ```jsx
 import React from 'react'
 import { StyleSheet, View, Platform, Text, Image, ImageSourcePropType } from 'react-native'
@@ -1241,3 +1242,58 @@ const styles = StyleSheet.create({
   },
 });
 ```
+
+## FlatList
+
+좀더 간단한 방법으로 리스트를 보여주는 거같다
+
+map 사용시 ```key```를 쪽 줘야하는데 ```keyExtractor``` 라는게 디폴트로 index를 넣어주고 원하는 값을 설정하면 그값으로 넣어주는거 같다
+
+```jsx
+  <FlatList
+    data={pokemonList}
+    renderItem={({ item }) => {
+      return (
+        <View style={styles.card} key={item.id}>
+          <Text style={styles.cardText}>{item.type}</Text>
+          <Text style={styles.cardText}>{item.name}</Text>
+        </View>
+      )
+    }} 
+    keyExtractor={(item, index) => item.id.toString()} />
+    ItemSeparatorComponent={<View>}
+  />
+```
+
+## Item Separtor
+
+> [!TIP]
+> 양 끝을 제외하고 설정한 값으로 나눠 준다.
+
+```jsx
+ItemSeparatorComponent={() => { return <View style={{ height: 16 }} /> }}
+```
+
+상위 코드를 ```FlatList```에 넣으면 적용이 된다
+
+## List Empty Component
+
+리스트가 비었을때 보여주는 컴포넌트를 정한다
+
+```jsx
+ListEmptyComponent={()=>{return <Text>포켓몬이 없습니다</Text>}}
+```
+
+상위 코드를 ```FlatList```에 넣으면 적용이 된다
+
+## List Header and Footer
+
+리스트의 헤더와 푸터를 꾸밀 수 있다.\
+이러한 방법으로 좀더 정형화된 리스트 목록을 만들 수 있을거 같다.
+
+```jsx
+ListHeaderComponent={<Text style={styles.headerText}>여기는 해더입니다</Text>}
+ListFooterComponent={<Text style={styles.footerText}>여기는 푸터입니다</Text>}
+```
+
+상위 코드를 ```FlatList```에 넣으면 적용이 된다
