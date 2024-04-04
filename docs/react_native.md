@@ -1353,3 +1353,48 @@ const styles = StyleSheet.create({
 ```
 
 이런식으로 사용가능하고 목차별로 나누아 지기 때문에 눈에 확띈다.
+
+## Text Input
+
+텍스트 인풋을 만들어 준다\
+입력값에 따라 UI를 보여주는 아래의 코드를 차마조하여 만들 고 싶은걸 만들면 될거같다
+
+```jsx
+import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+
+function InputTextTutorial() {
+  const [name, setname] = useState("")
+  return (
+    <View>
+      <TextInput style={styles.input} value={name} onChangeText={setname} />
+      <Text>You'r name is {name}</Text>
+    </View>
+  )
+}
+
+export default InputTextTutorial
+
+const styles = StyleSheet.create({
+  input: {
+    margin: 8,
+    padding: 8,
+    borderRadius: 30,
+    borderWidth: 2,
+  }
+});
+```
+
+또한 여러가지 프롬프트가 있다.
+
+| 옵션 | 설명 |
+| :-- | :--|
+| placeholder | 아무값이 없을때 보여주는 가이드라인 글이다 |
+| secureTextEntry | 비밀번호처럼 보이게 한다 |
+| keyboardType| 여러가지 타입의 입력 키보드를 준다 |
+| autoCorrect={false} | 자동 글자 수정을 하는것을 꺼준다 (정말 중요) |
+| autoCapitalize='none' | 자동 대문자 수정을 꺼준다 |
+| multiline | 여러줄을 받을 수 있게 해줍니다 |
+
+> [!IMPORTANT]
+> 자동으로 수정되는 키값을 꺼두어야 사용자의 입력값을 정확히 받을 수 있다
