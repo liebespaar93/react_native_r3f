@@ -1627,3 +1627,167 @@ const styles = StyleSheet.create({
 
 전체적인 코드다\
 이렇게 폼을 관리하여 보다 ux적으로 만들어 줄 수 있습니다
+
+## NetWorking
+
+이제 json을 가지고 정보를 받고 내보네는 연습을 해볼 예정이다.
+
+## Get Requests
+
+간단한 데이터 받기 방식이다 ```fetch```를 사용하여 받고
+```https://jsonplaceholder.typicode.com/posts```
+실험용 사이트 에서 제공하는 데이터를 받아 형식에 맞게 사용하면 된다.
+
+```jsx
+type postData = {
+  userId: number,
+  id: number,
+  title: string,
+  body: string
+}
+
+const [postList, setPostList] = useState<postData[]>([])
+
+const fetchData = async (limit = 10) => {
+  const response = await fetch(
+    `https://jsonplaceholder.typicode.com/posts?_limit=${limit}`
+  )
+  const data = await response.json()
+  setPostList(data)
+}
+useEffect(() => {
+  fetchData();
+}, [])
+```
+
+## Loading State
+
+```jsx
+const [isLoading, setIsLoading] = useState(true)
+
+if (isLoading) {
+  return (
+    <View style={styles.loadingContainer}>
+      <ActivityIndicator size='large' color="#0000ff" />
+      <Text>Loading</Text>
+    </View>)
+}
+```
+
+이러한 방법으로 로딩 상태를 만들 수 있고\
+함수에 아래 코드를 넣어주는 것으로
+
+```jsx
+setIsLoading(false)
+```
+
+로딩 상태를 없앨 수 있다.
+
+## Pull to Refresh
+
+> [!TIP]
+> 상위로 끌여올려 새로 고침을 하는 엡전용 동작을 만들어 준다
+
+```jsx
+<FlatList
+  ...
+  refreshing={refreshing}
+  onRefresh={handlelRefresh}
+/>
+```
+
+이렇게 함수를 추가해주고 원하는 실행 함수를\
+ ```onRefresh```에 넣어주면 상단에 끌어올림에 새로고침을 해준다
+
+## POST Request
+
+post 하는 법에 대하여 고만해보자
+
+간단하게 post 는 데이터 형식에 대한 해더와 정보를 담은 바디로 구성하여 쏴주면 된다.\
+이런한 함수를 만드는 방법은 아래와 같고
+
+```jsx
+const addPost = async () => {
+  if (!postTitle || !postBody)
+    return;
+  setIsPostring(true)
+  const response = await fetch("https://jsonplaceholder.typicode.com/posts", {
+    method: 'post',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      title: postTitle,
+      body: postBody
+    } satisfies postBody)
+  })
+
+  const newPost = await response.json()
+  console.log(newPost)
+  setPostList([newPost, ...postList])
+  setPostTitle("")
+  setPostBody("")
+}
+
+```
+
+입력을 받는 부분은 이러하다
+
+```jsx
+<View style={styles.inputContainer}>
+  <TextInput
+    style={styles.input}
+    placeholder=''
+    value={postTitle}
+    onChangeText={(value) => { setPostTitle(value) }}
+  />
+  <TextInput
+    style={styles.input}
+    placeholder=''
+    value={postBody}
+    onChangeText={(value) => setPostBody(value)}
+  />
+  <Button
+    title={isPosting ? "Adding..." : "Add Post"}
+    onPress={addPost}
+    disabled={isPosting}
+  />
+</View>
+```
+
+이것으로 압력을 한 값에 대하여 답변이 올것이고\
+리스트에 추가하는 식으로 하여 리스트가 늘고 있다
+
+## Error Handling
+
+에러는 상위 코드에 요청 및 응답이 잘못됫을때 감지하여 보여주기 위한 것으로\
+```try``` 가 잘안됫을때 보여줄 화면을 생성하면 된다.
+
+```jsx
+{error ?
+  <View style={styles.errorContainer}>
+    <Text style={styles.errorText}>{error}</Text>
+  </View> :
+  undefined
+}
+```
+
+상위처럼 코드를 짜주고
+
+```jsx
+const [error, setError] = useState("")
+
+try {
+  setError("")
+  ...
+} catch (error) {
+  console.error("Error adding new post:", error),
+    setIsPostring(false)
+  setError("Failed to add new post")
+}
+```
+
+이러한 식으로 에러상태를 확인하면 된다
+
+> [!TIP]
+> error 문구 없에는거 잊지말자

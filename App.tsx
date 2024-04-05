@@ -9,6 +9,7 @@ import { useState } from 'react';
 import InputTextTutorial from './components/tutorial/InputTextTutorial';
 import SwitchTutorial from './components/tutorial/SwitchTutorial';
 import FormTutorial from './components/tutorial/FormTutorial';
+import NetworkingTutorial from './components/tutorial/NetworkingTutorial';
 
 export default function App() {
   const dimensions = useWindowDimensions();
@@ -17,7 +18,7 @@ export default function App() {
   return (
     <SafeAreaView style={styles.safeContainer}>
       <View style={styles.container}>
-        <FormTutorial/>
+        <NetworkingTutorial/>
       </View>
     </SafeAreaView>
   );
