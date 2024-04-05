@@ -1432,3 +1432,198 @@ const styles = StyleSheet.create({
   }
 })
 ```
+
+## From
+
+이전 배웠던 ```input```과 여러가지 컴포넌트로 ```from```을 만들어 쓸 수 있다
+
+```jsx
+import React, { useState } from 'react'
+import { StyleSheet, Text, TextInput, View } from 'react-native'
+
+function FormTutorial() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    <View style={styles.form}>
+      <Text style={styles.label}>UserName</Text>
+      <TextInput style={styles.input}
+        placeholder='enter your username'
+        value={username}
+        onChangeText={(value) => { setUsername(value) }} />
+
+      <Text style={styles.label}>Password</Text>
+      <TextInput style={styles.input}
+        placeholder='enter your Password'
+        value={password}
+        onChangeText={(value) => { setPassword(value) }} 
+        secureTextEntry/>
+
+    </View>
+  )
+}
+
+export default FormTutorial
+
+const styles = StyleSheet.create({
+  form: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: "bold"
+  },
+  input: {
+    height: 40,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 5
+  }
+});
+```
+
+## KeyboardAvoidingView
+
+keyboard에 따라서 반응하는 form 을 만들려 할때 사용한다.
+
+```jsx
+<KeyboardAvoidingView
+  behavior='padding'
+  keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+>
+...생락
+</KeyboardAvoidingView>
+```
+
+이렇게 추가하는 방법으로 키보드 이벤트가 생겼을때 폼을 올려주는 방식을 만들수 있다.
+
+## Form Validation
+
+```jsx
+const [errors, setErrors] = useState<{ username?: string, password?: string }>({});
+
+const validateForm = () => {
+  let errors: { username?: string, password?: string } = {}
+
+  if (!username) errors.username = "Username is required";
+  if (!password) errors.password = "Password is required";
+  setErrors(errors);
+  return Object.keys(errors).length === 0;
+};
+```
+
+이라한 방법으로 에러를 컨트롤 할 수 있다
+
+## Form Submission
+
+```jsx
+import React, { useEffect, useState } from 'react'
+import { Button, Image, Keyboard, KeyboardAvoidingView, KeyboardEvent, Platform, StyleSheet, Text, TextInput, View } from 'react-native'
+import icon from '@/assets/icon.png'
+
+function FormTutorial() {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errors, setErrors] = useState<{ username?: string, password?: string }>({});
+
+  const validateForm = () => {
+    let errors: { username?: string, password?: string } = {}
+
+    if (!username) errors.username = "Username is required";
+    if (!password) errors.password = "Password is required";
+    setErrors(errors);
+    return Object.keys(errors).length === 0;
+  };
+
+  const handleSubmit = () => {
+    if (validateForm()) {
+      setUsername("");
+      setPassword("");
+      setErrors({})
+    }
+  };
+
+  return (
+    <KeyboardAvoidingView
+      behavior='padding'
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+    >
+      <View style={styles.form}>
+        <Image style={styles.image} source={icon} resizeMode='contain' />
+
+        <Text style={styles.label}>UserName</Text>
+        <TextInput style={styles.input}
+          placeholder='enter your username'
+          value={username}
+          onChangeText={(value) => { setUsername(value) }} />
+        {errors.username ? <Text style={styles.errorText}>{errors.username}</Text> : null}
+        <Text style={styles.label}>Password</Text>
+        <TextInput style={styles.input}
+          placeholder='enter your Password'
+          value={password}
+          secureTextEntry
+          onChangeText={(value) => { setPassword(value) }} />
+        {errors.password ? <Text style={styles.errorText}>{errors.password}</Text> : null}
+        <Button title="Login" onPress={handleSubmit} />
+      </View>
+    </KeyboardAvoidingView>
+  )
+}
+
+export default FormTutorial
+
+const styles = StyleSheet.create({
+  form: {
+    backgroundColor: "#fff",
+    borderRadius: 10,
+    padding: 20,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5
+  },
+  label: {
+    fontSize: 16,
+    marginBottom: 5,
+    fontWeight: "bold"
+  },
+  input: {
+    height: 40,
+    borderColor: "#ddd",
+    borderWidth: 1,
+    marginBottom: 15,
+    padding: 10,
+    borderRadius: 5
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    alignItems: 'center'
+  },
+  errorText: {
+    color: "#f00",
+    marginBottom: 10
+  }
+});
+```
+
+전체적인 코드다\
+이렇게 폼을 관리하여 보다 ux적으로 만들어 줄 수 있습니다
