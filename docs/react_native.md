@@ -1984,3 +1984,47 @@ export default NavigationDrawerTutorial
 ```
 
 상위 처럼 간단히 옵션을 주어 드롭박스를 꾸밀 수 있다
+
+## Tab Navigation
+
+탭으로 아래 버튼을 생성하고 이동이 가능하게 한다
+
+```jsx
+import React from 'react'
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Home from '../Home';
+import Setting from '../Setting';
+
+const Tab = createBottomTabNavigator();
+
+function NavigationTabTutorial() {
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Setting" component={Setting} />
+    </Tab.Navigator>
+  )
+}
+
+export default NavigationTabTutorial
+```
+
+아래에 이제 텝 네비게이션으로 이동이 가능하다
+
+## Tab Navigation Options
+
+```jsx
+<Tab.Screen name="Home" component={Home} options={{
+  tabBarLabelPosition: "beside-icon",
+  tabBarShowLabel: true,
+  tabBarActiveTintColor: "purple",
+  tabBarLabel: "test",
+  tabBarIcon: () => <Icon name="rocket" size={24} color="#900" />,
+  tabBarBadge:3
+
+}} />
+```
+
+신기한 옵션들이 여러개 있다\
+필자는 ```react-native-vector-icons``` 을 사용하여 아이콘을 사용하였고 이러한 텝 꾸미기는 참 이쁜거 같다

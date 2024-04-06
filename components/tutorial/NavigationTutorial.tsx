@@ -6,6 +6,7 @@ import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 
 import NavigationDrawerTutorial from './NavigationDrawerTutorial';
 import NavigationStackTutorial from './NavigationStackTutorial';
+import NavigationTabTutorial from './NavigationTabTutorial';
 
 export type RootStackParamList = {
   Home: undefined;
@@ -21,8 +22,9 @@ export type ProfileScreenNavigationProp = NativeStackNavigationProp<
 function NavigationTutorial() {
   return (
     <NavigationContainer>
-      <NavigationDrawerTutorial />
+      {/* <NavigationDrawerTutorial /> */}
       {/* <NavigationStackTutorial /> */}
+      <NavigationTabTutorial />
     </NavigationContainer>
   )
 }
