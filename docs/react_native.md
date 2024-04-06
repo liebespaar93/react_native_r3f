@@ -1791,3 +1791,196 @@ try {
 
 > [!TIP]
 > error 문구 없에는거 잊지말자
+
+## Navigation
+
+설치
+
+🔗 링크 :[https://reactnavigation.org/](https://reactnavigation.org/)
+
+```bash
+npm install @react-navigation/native
+```
+
+expo 에 플러그인 하기
+
+```bash
+npx expo install react-native-screens react-native-safe-area-context
+```
+
+## Stack Navigation
+
+stack navigation 설치
+
+```bash
+npm install @react-navigation/native-stack
+```
+
+이제 좀 심화 과정이 필요하다
+
+> [!IMPORTANT]
+> ```typescrite```는 ```navigation```을 쓰기위해 ```porps```를 지정해주여야하는데\
+> ```NativeStackNavigationProp```이라는 타입을 불러오고 지정한 ```stackparam``` 타입을 넣어주어야 한다
+
+```jsx
+import { NavigationContainer } from '@react-navigation/native'
+import { createNativeStackNavigator } from "@react-navigation/native-stack"
+import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
+
+import React from 'react'
+import Home from '../Home'
+import About from '../About'
+
+
+type RootStackParamList = {
+  Home: undefined;
+  About: { userId: string };
+  Profile: { userId: string };
+  Feed: { sort: 'latest' | 'top' } | undefined;
+};
+
+export type ProfileScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList
+>;
+
+const Stack = createNativeStackNavigator<RootStackParamList>()
+
+function NavigationTutorial() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Home'>
+        <Stack.Screen name='Home' component={Home}/>
+        <Stack.Screen name='About' component={About}/>
+      </Stack.Navigator>
+    </NavigationContainer>
+  )
+}
+
+export default NavigationTutorial
+```
+
+여기서는 저 ```ProfileScreenNavigationProp```을 사용하지 않지만 ```useNavigation()```을 사용할때 필요하기 때문에\
+```export``` 선언을 해준다.
+
+```jsx
+import { useNavigation } from '@react-navigation/native'
+import React from 'react'
+import { Button, Text, View } from 'react-native'
+import { ProfileScreenNavigationProp } from './tutorial/NavigationTutorial';
+
+function Home() {
+  const nav = useNavigation<ProfileScreenNavigationProp>();
+  return (
+    <View>
+      <Text>HOME PAGE</Text>
+      <Button title='Go to About' onPress={() => nav.navigate("About", { userId: "userid" })} />
+    </View>
+  )
+}
+
+export default Home
+```
+
+이제 보면 속성과 파라미터를 지정하여 타입에 맞게 보내줄 수 있다.
+
+> [!NOTE]
+> 단 페이지 함수에도 porps 형식을 같게 해주어야 한다.
+
+## Stack Navigation Options
+
+이제 네비게이션을 꾸미는 방법을 알아보자
+
+1. 개인하나하나 꾸미기
+
+  ```jsx
+  <Stack.Screen name='Home' component={Home}
+    options={{
+      title: "Welcome Home",
+      headerStyle: {
+        backgroundColor: "#ffdfcf"
+      },
+      headerTintColor: "#96637A",
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      },
+      headerRight: () => (
+        <Pressable onPress={() => { alert("Menu button pressed!") }}>
+          <Text style={{ color: "#96637A", fontSize: 16 }}>Menu</Text>
+        </Pressable>
+      )
+    }}
+  />
+  ```\
+  상위의 코드식으로 ```options```에 설정값을 주어 꾸미는 방법이 있습니다.
+
+2. 모든 네비게이션 설정
+  ```jsx
+  <Stack.Navigator initialRouteName='Home' screenOptions={
+    {
+      title: "Welcome Home",
+      headerStyle: {
+        backgroundColor: "#fff"
+      },
+      headerTintColor: "#96637A",
+      headerTitleStyle: {
+        fontWeight: 'bold'
+      },
+      headerRight: () => (
+        <Pressable onPress={() => { alert("Menu button pressed!") }}>
+          <Text style={{ color: "#96637A", fontSize: 16 }}>Menu</Text>
+        </Pressable>
+      )
+    }
+  }>
+  ```
+
+  ```sreenOption```을 사용하면 하위 정의된 네비게이션들이 모두 같은 형태를 유지할 수 있다
+
+> [!NOTE]
+> 단 개인 옵션으로 스타일링 한 것으로 덮어 씌워질 수 있습니다.
+
+## Draw Navigation
+
+메뉴 드롭박스 버튼으로 이동하는 네비게이션 이다
+
+```jsx
+import { createDrawerNavigator } from '@react-navigation/drawer';
+import Dashboards from '../Dashboards';
+import Setting from '../Setting';
+import { RootStackParamList } from './NavigationTutorial';
+import { View } from 'react-native';
+
+const Drawer = createDrawerNavigator<RootStackParamList>();
+
+function NavigationDrawerTutorial() {
+  return (
+    <Drawer.Navigator>
+      <Drawer.Screen name="Dashboard" component={Dashboards} />
+      <Drawer.Screen name="Setting" component={Setting} />
+    </Drawer.Navigator>
+  )
+}
+
+export default NavigationDrawerTutorial
+```
+
+## Draw Navigation Options
+
+상위 네비게이션과 동일하게 여러개의 옵션을 줄 수도 있고 하나의 스크린에만 줄 수 도 있다
+
+```jsx
+<Drawer.Screen name="Dashboard" component={Dashboards} options={{
+  title: "My dashboard",
+  drawerLabel: "Dashboard label",
+  drawerActiveTintColor: "red",
+  // drawerInactiveBackgroundColor: "pink",
+  drawerContentStyle:{
+    backgroundColor:"gray"
+  },
+  headerRight:()=>{
+    return <View></View>
+  }
+}}/>
+```
+
+상위 처럼 간단히 옵션을 주어 드롭박스를 꾸밀 수 있다
